@@ -38,34 +38,42 @@ class _AdminScreenState extends State<AdminScreen> {
             children: [
               Row(
                 children: [
-                  CustomCard(
-                    title: " All Records",
-                    icon: Icons.details,
-                    onPressed: () {
-                      Get.to(() => const AllRecords());
-                    },
+                  Expanded(
+                    child: CustomCard(
+                      title: " All Records",
+                      icon: Icons.details,
+                      onPressed: () {
+                        Get.to(() => const AllRecords());
+                      },
+                    ),
                   ),
                   const SizedBox(width: 13.0),
-                  CustomCard(
-                    title: "Attendence",
-                    icon: Icons.check_circle_outline,
-                    onPressed: () {},
+                  Expanded(
+                    child: CustomCard(
+                      title: "Attendence",
+                      icon: Icons.check_circle_outline,
+                      onPressed: () {},
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 20),
               Row(
                 children: [
-                  CustomCard(
-                    title: "System Report",
-                    icon: Icons.report_gmailerrorred,
-                    onPressed: () {},
+                  Expanded(
+                    child: CustomCard(
+                      title: "System Report",
+                      icon: Icons.report_gmailerrorred,
+                      onPressed: () {},
+                    ),
                   ),
                   const SizedBox(width: 13.0),
-                  CustomCard(
-                    title: "Leave Approval",
-                    icon: Icons.leave_bags_at_home_sharp,
-                    onPressed: () {},
+                  Expanded(
+                    child: CustomCard(
+                      title: "Leave Approval",
+                      icon: Icons.leave_bags_at_home_sharp,
+                      onPressed: () {},
+                    ),
                   ),
                 ],
               ),
