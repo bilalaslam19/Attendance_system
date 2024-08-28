@@ -8,10 +8,10 @@ class ViewdetailController extends GetxController {
       RxMap({});
   final UserprofileController userprofileController =
       Get.put(UserprofileController());
-  Future<void> fetchUserAttendanceData() async {
+  Future<void> fetchUserAttendanceData(String rollNo) async {
     try {
-      String? rollNo =
-          Get.put(UserprofileController()).userData.value?['rollNo'];
+      // String? rollNo =
+      //     Get.put(UserprofileController()).userData.value?['rollNo'];
 
       if (rollNo != null) {
         QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
@@ -23,6 +23,7 @@ class ViewdetailController extends GetxController {
         Map<DateTime, List<Map<String, dynamic>>> groupedData = {};
         for (var doc in snapshot.docs) {
           var data = doc.data();
+
           DateTime date = (data['date'] as Timestamp).toDate().toLocal();
 
           if (groupedData[date] == null) {

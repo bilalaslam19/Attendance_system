@@ -30,7 +30,7 @@ class _UserDetailScreenState extends State<UserDetailScreen>
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timestamp) {
       userDetaillController.fetchUserDataByRollNo(widget.rollNo);
-      viewdetailController.fetchUserAttendanceData();
+      viewdetailController.fetchUserAttendanceData(widget.rollNo);
     });
 
     tabController = TabController(length: 2, vsync: this);
@@ -170,7 +170,7 @@ class _UserDetailScreenState extends State<UserDetailScreen>
             }
           }),
           Obx(() {
-            if (userDetaillController.groupedAttendanceData.isEmpty) {
+            if (viewdetailController.groupedAttendanceData.isEmpty) {
               return const Center(child: CircularProgressIndicator());
             } else if (viewdetailController.groupedAttendanceData.isEmpty) {
               return const Center(child: Text('No attendance data available.'));

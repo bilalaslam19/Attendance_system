@@ -7,9 +7,9 @@ class ViewDetail extends StatelessWidget {
   final ViewdetailController viewdetailController =
       Get.put(ViewdetailController());
 
-  ViewDetail({super.key}) {
-    viewdetailController.fetchUserAttendanceData();
-  }
+  // ViewDetail({super.key}) {
+  //   viewdetailController.fetchUserAttendanceData();
+  // }
 
   @override
   Widget build(BuildContext context) {
