@@ -6,10 +6,11 @@ import 'package:get/get.dart';
 class ViewDetail extends StatelessWidget {
   final ViewdetailController viewdetailController =
       Get.put(ViewdetailController());
+  final String rollNo;
 
-  // ViewDetail({super.key}) {
-  //   viewdetailController.fetchUserAttendanceData();
-  // }
+  ViewDetail({super.key, required this.rollNo}) {
+    viewdetailController.fetchUserAttendanceData(rollNo);
+  }
 
   @override
   Widget build(BuildContext context) {

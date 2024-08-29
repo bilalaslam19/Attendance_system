@@ -23,6 +23,8 @@ class _UserPanelState extends State<UserPanel> {
   final RegistrationController registrationController =
       Get.put(RegistrationController());
 
+  String? rollNo;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +94,9 @@ class _UserPanelState extends State<UserPanel> {
                         title: 'View Detail',
                         icon: Icons.book_online_rounded,
                         onPressed: () {
-                          Get.to(() => ViewDetail());
+                          Get.to(() => ViewDetail(
+                              rollNo: userprofileController
+                                  .userData.value!['rollNo']));
                         },
                       ),
                     ],

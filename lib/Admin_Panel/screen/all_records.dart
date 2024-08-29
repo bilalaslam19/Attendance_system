@@ -20,7 +20,7 @@ class AllRecords extends StatelessWidget {
             backgroundColor: Colors.deepPurple[400],
             centerTitle: true,
             title: const Text(
-              "All User",
+              "All Users",
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.white,
@@ -51,34 +51,29 @@ class AllRecords extends StatelessWidget {
               itemCount: userController.users.length,
               itemBuilder: (BuildContext context, int index) {
                 var user = userController.users[index];
-                return Card(
-                  color: Colors.deepPurple[300],
-                  child: ListTile(
-                    title: Text(
-                      'Name: ${user['name'] ?? 'N/A'}',
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w200),
-                    ),
-                    subtitle: Text(
-                      'Roll No: ${user['rollNo'] ?? 'N/A'}',
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w200),
-                    ),
-                    trailing: IconButton(
-                      onPressed: () {
-                        // Pass the user's roll number to UserDetailScreen
-                        Get.to(() => UserDetailScreen(user['rollNo']));
-                      },
-                      icon: const Icon(
-                        Icons.arrow_forward,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
+                return InkWell(
+                  onTap: () {
+                    Get.to(() => UserDetailScreen(user['rollNo']));
+                  },
+                  child: Card(
+                    color: Colors.deepPurple[300],
+                    child: ListTile(
+                        title: Text(
+                          'Name: ${user['name'] ?? 'N/A'}',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w200),
+                        ),
+                        subtitle: Text(
+                          'Roll No: ${user['rollNo'] ?? 'N/A'}',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w200),
+                        ),
+                        trailing: const Icon(Icons.arrow_forward_ios_outlined,
+                            color: Colors.white, size: 20)),
                   ),
                 );
               },

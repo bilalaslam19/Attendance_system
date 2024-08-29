@@ -273,19 +273,22 @@ class RegistrationController extends GetxController {
     }
   }
 
-  Future<void> saveAttendance(
-      DateTime selectedDate, bool isPresent, userData) async {
+  Future<void> saveAttendance(DateTime selectedDate, bool isPresent,
+      Map<String, dynamic> userData) async {
     try {
       final attendanceData = {
         'name': userData['name'],
         'rollNo': userData['rollNo'],
-        'date': selectedDate,
-        'status': isPresent ? 'Present' : 'Absent'
+        'date': Timestamp.fromDate(selectedDate),
+        'status': isPresent,
       };
+
+      final documentId =
+          '${userData['rollNo']}_${selectedDate.toIso8601String()}';
 
       await FirebaseFirestore.instance
           .collection('data')
-          .doc('${userData['rollNo']}_${selectedDate.toString()}')
+          .doc(documentId)
           .set(attendanceData);
 
       Get.snackbar(
@@ -295,6 +298,7 @@ class RegistrationController extends GetxController {
         backgroundColor: Colors.green,
         colorText: Colors.white,
       );
+
       Get.to(() => const UserPanel());
     } catch (e) {
       Get.snackbar(

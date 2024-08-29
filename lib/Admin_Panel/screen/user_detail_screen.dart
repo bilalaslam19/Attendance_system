@@ -1,5 +1,4 @@
 import 'package:attendence/screens/user_dashboard/view_detail.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/userpanel_controller/viewdetail_controller.dart';
@@ -66,7 +65,7 @@ class _UserDetailScreenState extends State<UserDetailScreen>
             Tab(
               text: "Attendance",
               icon: Icon(
-                Icons.access_time,
+                Icons.book,
                 color: Colors.white,
               ),
             ),
@@ -182,8 +181,7 @@ class _UserDetailScreenState extends State<UserDetailScreen>
                       .toList()[index];
                   var records =
                       viewdetailController.groupedAttendanceData[date]!;
-                  print("TESTING LENGTH");
-                  print(viewdetailController.groupedAttendanceData.length);
+
                   return Card(
                     margin: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 16),

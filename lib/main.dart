@@ -1,5 +1,7 @@
 import 'package:attendence/Admin_Panel/screen/admin_screen.dart';
 import 'package:attendence/firebase_options.dart';
+import 'package:attendence/screens/auth_ui.dart/sign_up.dart';
+import 'package:attendence/screens/user_dashboard/user_panel.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

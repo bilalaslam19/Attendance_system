@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 
 class UserController extends GetxController {
   var users = <Map<String, dynamic>>[].obs; // Observable list of user data
-  var isLoading = true.obs; // Observable for loading state
+  var isLoading = true.obs;
+
+  get rollNo => null; // Observable for loading state
 
   @override
   void onInit() {

@@ -1,5 +1,8 @@
+import 'package:attendence/Admin_Panel/admin_controller.dart/user_controller.dart';
 import 'package:attendence/Admin_Panel/screen/all_records.dart';
+import 'package:attendence/Admin_Panel/screen/attendance_screen.dart';
 import 'package:attendence/controller/auth_controller/signup_controller.dart';
+import 'package:attendence/controller/userpanel_controller/viewdetail_controller.dart';
 import 'package:attendence/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +16,9 @@ class AdminScreen extends StatefulWidget {
 
 class _AdminScreenState extends State<AdminScreen> {
   final SignupController signupController = Get.put(SignupController());
+
+  final ViewdetailController viewdetailController =
+      Get.put(ViewdetailController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,9 +58,11 @@ class _AdminScreenState extends State<AdminScreen> {
                     child: CustomCard(
                       title: "Attendence",
                       icon: Icons.check_circle_outline,
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(() => AttendanceScreen());
+                      },
                     ),
-                  ),
+                  )
                 ],
               ),
               const SizedBox(height: 20),
