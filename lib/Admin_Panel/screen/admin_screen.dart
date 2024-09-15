@@ -1,4 +1,4 @@
-import 'package:attendence/Admin_Panel/admin_controller.dart/user_controller.dart';
+import 'package:attendence/Admin_Panel/screen/all_leave.dart';
 import 'package:attendence/Admin_Panel/screen/all_records.dart';
 import 'package:attendence/Admin_Panel/screen/attendance_screen.dart';
 import 'package:attendence/controller/auth_controller/signup_controller.dart';
@@ -6,6 +6,8 @@ import 'package:attendence/controller/userpanel_controller/viewdetail_controller
 import 'package:attendence/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../screens/user_dashboard/user_panel.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -36,6 +38,14 @@ class _AdminScreenState extends State<AdminScreen> {
                   fontSize: 25.0),
             ),
             leading: const SizedBox(),
+            // leading: IconButton(
+            //   onPressed: () {
+            //     Get.isDarkMode
+            //         ? Get.changeTheme(ThemeData.light())
+            //         : Get.changeTheme(ThemeData.dark());
+            //   },
+            //   icon: const Icon(Icons.dark_mode),
+            // ),
           )),
       body: SingleChildScrollView(
         child: Padding(
@@ -80,7 +90,9 @@ class _AdminScreenState extends State<AdminScreen> {
                     child: CustomCard(
                       title: "Leave Approval",
                       icon: Icons.leave_bags_at_home_sharp,
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(() => const LeaveScreen());
+                      },
                     ),
                   ),
                 ],
@@ -90,7 +102,11 @@ class _AdminScreenState extends State<AdminScreen> {
                 title: "LogOut",
                 icon: Icons.logout_outlined,
                 onPressed: () {
-                  signupController.logout();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const UserPanel()));
+                  // signupController.logout();
                 },
               )
             ],

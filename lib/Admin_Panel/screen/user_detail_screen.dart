@@ -1,4 +1,5 @@
 import 'package:attendence/screens/user_dashboard/view_detail.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/userpanel_controller/viewdetail_controller.dart';
@@ -56,16 +57,14 @@ class _UserDetailScreenState extends State<UserDetailScreen>
           ),
           bottom: TabBar(controller: tabController, tabs: const [
             Tab(
-              text: "Profile",
               icon: Icon(
                 Icons.person,
                 color: Colors.white,
               ),
             ),
             Tab(
-              text: "Attendance",
               icon: Icon(
-                Icons.book,
+                Icons.details,
                 color: Colors.white,
               ),
             ),
@@ -182,38 +181,45 @@ class _UserDetailScreenState extends State<UserDetailScreen>
                   var records =
                       viewdetailController.groupedAttendanceData[date]!;
 
-                  return Card(
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 16),
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text(
-                              'Date: ${date.toLocal().toShortDateString()}'),
-                          tileColor: Colors.deepPurple[300],
-                          textColor: Colors.white,
-                          contentPadding: const EdgeInsets.all(16),
-                        ),
-                        ...records.map((data) {
-                          Color statusColor;
-                          if (data['status'] == 'Absent') {
-                            statusColor = Colors.redAccent;
-                          } else if (data['status'] == 'Present') {
-                            statusColor = Colors.green;
-                          } else {
-                            statusColor = Colors.grey;
-                          }
-
-                          return ListTile(
-                            title: Text('Name: ${data['name']}'),
-                            subtitle: Text(
-                                'Roll No: ${data['rollNo']}\nStatus: ${data['status']}'),
-                            tileColor: statusColor.withOpacity(0.2),
-                            textColor: statusColor,
+                  return InkWell(
+                    onLongPress: () {
+                      setState(() {
+                        viewdetailController.groupedAttendanceData.remove(date);
+                      });
+                    },
+                    child: Card(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 16),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: Text(
+                                'Date: ${date.toLocal().toShortDateString()}'),
+                            tileColor: Colors.deepPurple[300],
+                            textColor: Colors.white,
                             contentPadding: const EdgeInsets.all(16),
-                          );
-                        }),
-                      ],
+                          ),
+                          ...records.map((data) {
+                            Color statusColor;
+                            if (data['status'] == 'Absent') {
+                              statusColor = Colors.redAccent;
+                            } else if (data['status'] == 'Present') {
+                              statusColor = Colors.green;
+                            } else {
+                              statusColor = Colors.grey;
+                            }
+
+                            return ListTile(
+                              title: Text('Name: ${data['name']}'),
+                              subtitle: Text(
+                                  'Roll No: ${data['rollNo']}\nStatus: ${data['status']}'),
+                              tileColor: statusColor.withOpacity(0.2),
+                              textColor: statusColor,
+                              contentPadding: const EdgeInsets.all(16),
+                            );
+                          }),
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -223,6 +229,19 @@ class _UserDetailScreenState extends State<UserDetailScreen>
         ],
       ),
     );
+  }
+
+  Future<void> deleteLeaveRequest(String docId) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('attendance')
+          .doc(docId)
+          .delete();
+      print('Leave request deleted successfully');
+    } catch (e) {
+      print('Error deleting leave request: $e');
+      throw Exception('Failed to delete leave request');
+    }
   }
 }
 

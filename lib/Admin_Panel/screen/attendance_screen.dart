@@ -16,7 +16,7 @@ class AttendanceScreen extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size(0, 100),
         child: AppBar(
-          backgroundColor: Colors.deepPurple[400],
+          backgroundColor: Colors.deepPurple[300],
           centerTitle: true,
           title: const Text(
             "Daily Attendance",
@@ -31,7 +31,7 @@ class AttendanceScreen extends StatelessWidget {
             onTap: () => Get.to(const AdminScreen()),
             child: Card(
               shadowColor: Colors.white,
-              color: Colors.deepPurple[400],
+              color: Colors.deepPurple[300],
               child: const Icon(
                 Icons.arrow_back_ios_new_outlined,
                 color: Colors.white,
@@ -109,13 +109,20 @@ class AttendanceScreen extends StatelessWidget {
                     style: const TextStyle(color: Colors.white, fontSize: 15),
                   )),
                   DataCell(
-                    Icon(
+                    Text(
                       attendance.status == 'Present'
-                          ? Icons.check_circle
-                          : Icons.cancel,
-                      color: attendance.status == 'Present'
-                          ? Colors.green
-                          : Colors.red,
+                          ? 'Present'
+                          : attendance.status == 'Absent'
+                              ? 'Absent'
+                              : 'Leave',
+                      style: TextStyle(
+                        color: attendance.status == 'Present'
+                            ? Colors.green
+                            : attendance.status == 'Absent'
+                                ? Colors.red
+                                : Colors.grey[800],
+                        fontSize: 15,
+                      ),
                     ),
                   ),
                 ]);

@@ -1,3 +1,4 @@
+import 'package:attendence/Admin_Panel/screen/admin_screen.dart';
 import 'package:attendence/controller/registration_controller/registration_controller.dart';
 import 'package:attendence/screens/user_dashboard/leave.dart';
 import 'package:attendence/screens/user_dashboard/view_detail.dart';
@@ -125,6 +126,12 @@ class _UserPanelState extends State<UserPanel> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 40),
+                  InkWell(
+                      onTap: () {
+                        Get.to(const AdminScreen());
+                      },
+                      child: const Icon(Icons.arrow_back))
                 ],
               ),
             ),

@@ -1,36 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AttendanceModel {
-  String uid;
-  String name;
-  String rollNo;
-  DateTime date;
-  String status; // Ensure this is a String
+  final String id;
+  final String name;
+  final String rollNo;
+  final DateTime date;
+  final String status;
+  final String description;
 
   AttendanceModel({
-    required this.uid,
+    required this.id,
     required this.name,
     required this.rollNo,
     required this.date,
     required this.status,
+    required this.description,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'rollNo': rollNo,
-      'date': Timestamp.fromDate(date),
-      'status': status, // Ensure this is a String
-    };
-  }
-
-  factory AttendanceModel.fromMap(Map<String, dynamic> map) {
+  factory AttendanceModel.fromMap(String id, Map<String, dynamic> data) {
     return AttendanceModel(
-      uid: map['uid'] ?? '', // Ensure defaults if necessary
-      name: map['name'] ?? '',
-      rollNo: map['rollNo'] ?? '',
-      date: (map['date'] as Timestamp).toDate(),
-      status: map['status'] ?? 'Absent', // Default to 'Absent' if null
+      id: id,
+      name: data['name'] ?? '',
+      rollNo: data['rollNo'] ?? '',
+      date: (data['date'] as Timestamp).toDate(),
+      status: data['status'] ?? '',
+      description: data['description'] ?? '',
     );
   }
 }
